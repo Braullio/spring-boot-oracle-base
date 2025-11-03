@@ -1,0 +1,77 @@
+### Build/Artefatos do Java e Maven/Gradle
+# Arquivos de log e saída do Build
+target/
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# Arquivos de build específicos (Maven, Gradle)
+# Se estiver usando Maven:
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+build/
+.gradle/
+.project
+.classpath
+.settings/
+*.log
+*.log.*
+*.war
+*.ear
+*.zip
+*.tar.gz
+
+### Diretórios e Arquivos do Spring Boot
+# Arquivos gerados pelo Spring Boot
+/classes/
+
+### IDEs e Ferramentas de Desenvolvimento
+# IntelliJ IDEA / WebStorm / Android Studio
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Eclipse
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+# Arquivos de configurações do Eclipse (se aplicável)
+.settings/
+.settings.prefs
+
+# VS Code
+.vscode/
+
+### Dependências
+# Dependências empacotadas
+/lib/
+/libs/
+
+### Dados e Ferramentas Locais
+# Variáveis de ambiente secretas
+.env
+.env.local
+*.env
+
+# Dados do Docker e Flyway
+# O volume de dados do Oracle (definido no docker-compose.yml)
+oracle-data/
+# Logs gerados pelos contêineres Docker (se mapeados localmente)
+docker/*.log
+
+# Flyway (Ignora o diretório de instalação local, se houver)
+flyway-cli/
+flyway.conf
+
+### Sistema Operacional e Outros
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db

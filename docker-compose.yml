@@ -1,0 +1,22 @@
+services:
+  oracle-db:
+    image: gvenzl/oracle-xe:21-full
+    container_name: oracle-xe
+    environment:
+      ORACLE_PASSWORD: a8a32cafa5879938c763
+      ORACLE_ALLOW_REMOTE: "true"
+    ports:
+      - "1521:1521"
+      - "5500:5500"
+    volumes:
+      - oracle-data:/opt/oracle/oradata
+      - ./init:/container-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD", "bash", "-c", "echo 'SELECT 1 FROM dual;' | sqlplus -L sys/$$ORACLE_PASSWORD@XEPDB1 AS SYSDBA"]
+      interval: 10s
+      retries: 10
+      timeout: 5s
+
+volumes:
+  oracle-data:
+    driver: local
