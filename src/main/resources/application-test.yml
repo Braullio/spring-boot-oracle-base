@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    username: TEST_USER
+    password: a8a32cafa5879938c763
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+logging:
+  level:
+    root: WARN

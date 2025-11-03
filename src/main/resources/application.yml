@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: spring-boot-oracle-base
+
+  profiles:
+    active: dev
+
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1521/XEPDB1
+    username: ${DB_USER:DEV_USER}
+    password: ${DB_PASS:a8a32cafa5879938c763}
+    driver-class-name: oracle.jdbc.OracleDriver
+
+  jpa:
+    database-platform: org.hibernate.dialect.OracleDialect
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+        jdbc:
+          batch_size: 30
+
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    locations: classpath:db/migration
+
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+logging:
+  level:
+    root: INFO
+    org.springframework: INFO
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+app:
+  name: Spring Boot Oracle Base
+  description: Basic project for Spring Boot micro services with Oracle, Flyway, and TDD.
