@@ -1,5 +1,6 @@
 package io.github.braullio.oraclebase.core.stream;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +27,7 @@ public class MessageProducer {
         CommandLog logEntry = CommandLog.builder()
                 .queueName(queueName)
                 .commandType(commandPayload.getClass().getSimpleName())
-                .payload(commandPayload.toString())
+                .payload(convertToJson(commandPayload))
                 .timestamp(Instant.now())
                 .sent(false)
                 .error(0)
@@ -49,7 +50,7 @@ public class MessageProducer {
         EventLog logEntry = EventLog.builder()
                 .routingKey(routingKey)
                 .eventType(eventPayload.getClass().getSimpleName())
-                .payload(eventPayload.toString())
+                .payload(convertToJson(eventPayload))
                 .timestamp(Instant.now())
                 .sent(false)
                 .error(0)
@@ -68,4 +69,12 @@ public class MessageProducer {
         }
     }
 
+    private String convertToJson(Object payload) {
+        try {
+            return objectMapper.writeValueAsString(payload);
+        } catch (JsonProcessingException e) {
+            log.warn("Falha ao converter objeto '{}' para JSON. Usando toString().", payload.getClass().getSimpleName(), e);
+            return payload.toString();
+        }
+    }
 }
